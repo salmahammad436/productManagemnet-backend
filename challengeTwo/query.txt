@@ -1,0 +1,29 @@
+//postgresSql
+
+SELECT id, name, category, price, quantity, created_at 
+FROM products
+WHERE price BETWEEN 50 AND 200
+ORDER BY price ASC
+LIMIT 10 OFFSET $1;
+
+
+
+
+//mongoDB
+db.products.find({ category: "Electronics" })
+  .sort({ price: -1 }) 
+  .skip((page - 1) * 5)
+  .limit(5);  
+
+// how to opimize the queries 
+for sql
+1- we can make INDEX in price => CREATE INDEX idx_price ON products(price);
+2- also we can use cashing such as redis for frequent queries to reduce database load
+3-connection pooling
+
+for Nosql
+1- we can use indxing in price  => db.products.createIndex({ category: 1, price: -1 });
+2-we can use  MongoDB sharding for horizontal scaling in high-traffic
+3- also cashing using like redis
+
+
